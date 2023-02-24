@@ -7,6 +7,26 @@ export function createRecipeDOM(recipe) {
     }).join('');
 
     const article = document.createElement('article');
+    
+   
+   
+   
+    const recipeDescription = recipe.description;
+    const amount = 200;   
+       
+         const description ='<strong>description: <br></strong>'+( recipeDescription.substring(0, amount)  + (recipeDescription.length > amount ? "..." :""));
+       
+  
+        
+    
+  
+
+  
+  
+   
+    
+   
+   
     article.classList.add('col-12', 'col-md-6', 'col-lg-4', 'mb-4');
     article.innerHTML = `
             <div class="bg-light rounded-2">
@@ -24,9 +44,11 @@ export function createRecipeDOM(recipe) {
                 <div class="row card__description p-3">
                     <div class="col">
                         ${ingredientsList}
+
                     </div>
-                    <div >
-                    //description ici 
+
+                    <div class="col" >
+                    ${description}
                     </div>
                 </div>
             </div>
