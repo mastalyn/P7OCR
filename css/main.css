@@ -1,0 +1,12 @@
+.bg-light {
+    background-color: #E7E7E7!important;
+}
+
+.card__description {
+    font-size:12px;
+    line-height: 12px;
+}
+
+.card__title {
+    font-size: 18px
+}
