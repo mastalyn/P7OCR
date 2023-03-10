@@ -6,27 +6,13 @@ export function createRecipeDOM(recipe) {
         return `<div><strong>${ingredient.ingredient}</strong>: ${quantity} ${unit}</div>`;
     }).join('');
 
-    const article = document.createElement('article');
-    
-   
-   
+    const article = document.createElement('article');  
    
     const recipeDescription = recipe.description;
     const amount = 200;   
        
          const description ='<strong>description: <br></strong>'+( recipeDescription.substring(0, amount)  + (recipeDescription.length > amount ? "..." :""));
-       
-  
-        
-    
-  
-
-  
-  
-   
-    
-   
-   
+         
     article.classList.add('col-12', 'col-md-6', 'col-lg-4', 'mb-4');
     article.innerHTML = `
             <div class="bg-light rounded-2">

@@ -10,3 +10,12 @@
 .card__title {
     font-size: 18px
 }
+
+.show {
+    display: block;
+}
+
+#sorter input::placeholder{
+ color: white !important;
+ opacity: 0.5;
+ }
