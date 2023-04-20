@@ -35,7 +35,23 @@ function createIngredients(recipes) {
         // affiche le input recherche
         input.classList.remove('d-none')
          // Affiche la dropDown .
-        event.target.parentNode.getElementsByTagName('ul')[0].classList.remove('d-none')      
+        event.target.parentNode.getElementsByTagName('ul')[0].classList.remove('d-none')  
+
+        input.onkeyup = (event) => {
+            const list = event.target.parentNode.getElementsByTagName('ul')[0]
+            const li = list.getElementsByTagName('li')
+            const filter = event.target.value.toUpperCase()
+
+            for (let i = 0; i < li.length; i++) {
+                const button = li[i].getElementsByTagName('button')[0]
+                const txtValue = button.textContent || button.innerText
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ''
+                } else {
+                    li[i].style.display = 'none'
+                }
+            }
+        }    
  // Ajoute un événement pour masquer la dropDown  lorsque l'utilisateur clique en dehors de celle-ci.
         onClick(
             document.getElementById('ingredientsButton').parentNode,
@@ -75,7 +91,21 @@ function createAppliances(recipes) {
        
         event.target.parentNode.getElementsByTagName('ul')[0].classList.remove('d-none')     
       
+        input.onkeyup = (event) => {
+            const list = event.target.parentNode.getElementsByTagName('ul')[0]
+            const li = list.getElementsByTagName('li')
+            const filter = event.target.value.toUpperCase()
 
+            for (let i = 0; i < li.length; i++) {
+                const button = li[i].getElementsByTagName('button')[0]
+                const txtValue = button.textContent || button.innerText
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ''
+                } else {
+                    li[i].style.display = 'none'
+                }
+            }
+        }
         onClick(
             document.getElementById('appliancesButton').parentNode,
             () => {
@@ -108,6 +138,22 @@ function createUstensils(recipes) {
         const input = event.target.parentNode.getElementsByTagName('input')[0]       
         input.classList.remove('d-none')       
         event.target.parentNode.getElementsByTagName('ul')[0].classList.remove('d-none')      
+
+        input.onkeyup = (event) => {
+            const list = event.target.parentNode.getElementsByTagName('ul')[0]
+            const li = list.getElementsByTagName('li')
+            const filter = event.target.value.toUpperCase()
+
+            for (let i = 0; i < li.length; i++) {
+                const button = li[i].getElementsByTagName('button')[0]
+                const txtValue = button.textContent || button.innerText
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = ''
+                } else {
+                    li[i].style.display = 'none'
+                }
+            }
+        }
 
         onClick(
             document.getElementById('ustensilsButton').parentNode,

@@ -18,6 +18,16 @@ export default class ddl {
         tags(this.filterBytags);
         DropDownList(recipes);
         this.searchByTags = document.getElementById('tags_search');
+        this.searchByTags.onkeyup = (event) => {
+        
+              if (event.target.value.length > 2) {
+                  this.search(event.target.value)
+              } else {
+                  this.search('')
+              }
+           
+         
+      }
     }
     
     // La méthode "search" filtre les recettes en fonction des tags sélectionnés. 
@@ -26,11 +36,11 @@ export default class ddl {
     // S'il n'y a pas de tags sélectionnés, elle renvoie toutes les recettes. 
     // Si une recette contient au moins un tag sélectionné, elle retourne la recette. 
     // La fonction met ensuite à jour l'élément HTML avec les recettes filtrées.
-    search() {
+    search(query) {
         const filteredRecipes = this.recipes.filter(recipe => {
-            const existingTag = recipe.name
-                || recipe.description           
-                || recipe.ingredients.find(ingredient => ingredient);
+            const existingTag = recipe.name.toLowerCase().includes(query.toLowerCase())
+                || recipe.description.toLowerCase().includes(query.toLowerCase())           
+                || recipe.ingredients.find(ingredient => ingredient.ingredient.toLowerCase().includes(query.toLowerCase()));
                 
             if (existingTag && this.filterBytags === []) {
                 return recipe;
@@ -49,8 +59,8 @@ export default class ddl {
             filteredRecipes.forEach(recipe => {
                 this.recipesSection.appendChild(createRecipeDOM(recipe));
             });
-        
-        DropDownList(filteredRecipes);
+           
+      //  DropDownList(filteredRecipes);
     }
   
     isFilteredByTag(recipe) {
@@ -59,7 +69,7 @@ export default class ddl {
         this.filterBytags.forEach(tag => {
           if (tag.tagCategory === 'ingredient') {
             // Vérifie si au moins un ingrédient correspond au  tag et le converti en minuscule 
-           // some() est utilisé pour vérifier si au moins un élément des tableaux ingredients ou ustensils correspond  tag.
+           // some() est utilisé pour vérifier si au moins un élément des tableaux ingredients ou ustensils correspond au  tag.
            // Elle prend une fonction de callback  en argument, elle est exécutée pour chaque élément du tableau jusqu'à ce qu'elle retoune true,
            // ou jusqu'à ce que la fin du tableau soit atteinte.
             const isMatchingIngredient = recipe.ingredients.some(
@@ -74,7 +84,7 @@ export default class ddl {
               // Si l'appareil ne correspond pas au tag,  alors false
               isRecipeFiltered = false;
             }
-          }//voir pour faire avec description car on trouve des choses dans la description aussi 
+          }
            else if (tag.tagCategory === 'ustensil') {
             // Vérifie si au moins un ustensile correspond au nom du tag
             const isMatchingUstensil = recipe.ustensils.some(

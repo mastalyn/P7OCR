@@ -10,15 +10,14 @@ export default (el, callback) => {
             if (target === el) return;
             target = target.parentNode;
         } while (target);
-        // Si l'événement 'clic' se produit en dehors de l'élément spécifié, on annule les requêtes en cours et on appelle la fonction de callBack
-        controller.abort();
+       // on appelle la fonction de callBack
+        
         callback();
     }
 
-    // Crée un nouvel objet AbortController qui servira à annuler les requêtes en cours si nécessaire
-    let controller = new AbortController();
+    
 
     // Ajoute un écouteur d'événements pour les clics  l'ensemble du doc
-    document.addEventListener('click', (event) => check(event, el, callback), {signal: controller.signal});
+    document.addEventListener('click', (event) => check(event, el, callback));
 
 }
