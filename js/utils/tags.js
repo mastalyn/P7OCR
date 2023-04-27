@@ -22,7 +22,7 @@ export default function (tags) {
         //on affiche la croix de fermeture 
         tagsContainer.innerHTML += `<div class="border-0 ${color} text-white p-1 px-2 rounded me-2 mb-2 text-start">
                                         ${tag.name}
-                                        <button onclick="window.ddl.removeTagFilter('${tag.name}')"
+                                        <button onclick="window.mainSearch.removeTagFilter('${tag.name}')"
                                                 class="rounded-circle border-0 bg-transparent" 
                                                 aria-label="Supprimer le tag ${tag.name}"
                                         >

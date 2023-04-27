@@ -6,19 +6,19 @@ export default class ddl {
     recipes; // Tableau d'objets recettes.
     recipesSection; // Élément HTML pour afficher les recettes filtrées ou non.
     filterBytags = []; // Tableau des tags sélectionnés pour filtrer les recettes.
-    searchByTags; // Élément HTML pour la recherche par tags.
+    mainSearch; // Élément HTML pour la recherche par tags.
     
     // Le constructeur prend deux arguments, "recipes" et "recipesSection", 
     // qui sont un tableau d'objets recettes et un élément HTML où les recettes filtrées seront affichées.
-    // On initialise "filterByTags" et "searchByTags" et on appelle les fonctions "tags" et "DropDownList".
+    // On initialise "filterByTags" et "mainsearch" et on appelle les fonctions "tags" et "DropDownList".
     // On récupère l'élément avec son ID.
     constructor(recipes, recipesSection) {
         this.recipes = recipes;
         this.recipesSection = recipesSection;
         tags(this.filterBytags);
         DropDownList(recipes);
-        this.searchByTags = document.getElementById('tags_search');
-        this.searchByTags.onkeyup = (event) => {
+        this.mainsearch = document.getElementById('recipeInput');
+        this.mainsearch.onkeyup = (event) => {
         
               if (event.target.value.length > 2) {
                   this.search(event.target.value)
@@ -104,20 +104,20 @@ export default class ddl {
 
 //"addTagFilter" prend deux arguments, "name" et "tagCategory", et ajoute un nouvel objet name tag au tableau "filterBytags". 
 // Si le tag existe déjà, il ne l'ajoute pas à nouveau. 
-// Elle appelle ensuite la méthode "search" avec la valeur actuelle de "searchByTags".
+// Elle appelle ensuite la méthode "search" avec la valeur actuelle de "mainsearch".
 addTagFilter(name, tagCategory) {
     if (this.filterBytags.find(tag => tag.name === name)) 
         return;
     this.filterBytags.push({name, tagCategory});  
-    this.search(this.searchByTags.value);     
+    this.search(this.mainsearch.value);     
     tags(this.filterBytags);
 }
 
 // "removeTagFilter" prend "tagName" en argument et supprime l'objet name tag du tableau "filterBytags".
-// Elle appelle ensuite la méthode "search" avec la valeur actuelle de "searchByTags".
+// Elle appelle ensuite la méthode "search" avec la valeur actuelle de "mainsearch".
 removeTagFilter(tagName) {
     this.filterBytags = this.filterBytags.filter(tag => tag.name !== tagName);  
-    this.search(this.searchByTags.value);     
+    this.search(this.mainsearch.value);     
     tags(this.filterBytags);
 }
 

@@ -1,5 +1,5 @@
 import { createRecipeDOM } from './pages/createRecipeDOM.js';
-import ddl from './search/ddl.js';
+import mainSearch from './search/mainSearch.js';
 import recipes from '../data/recipes.js';
 
 // Récupére l'élément de section des recettes dans le DOM
@@ -11,4 +11,4 @@ recipes.forEach((recipe) => {
 });
 
 //  nouvelle instance de la classe ddl, en passant un tableau de recettes recipes et recipesSection en tant qu'arguments
-window.ddl = new ddl(recipes, recipesSection);
+window.mainSearch = new mainSearch(recipes, recipesSection);

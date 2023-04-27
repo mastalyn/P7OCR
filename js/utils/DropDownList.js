@@ -17,7 +17,7 @@ function createIngredients(recipes) {
  // Génère du code HTML pour les boutons dans la dropDown.
     let html = ''
    map.forEach((value, ingredient) => html += `<li class="col-4">
-                                                    <button onclick="window.ddl.addTagFilter('${ingredient}', 'ingredient')" 
+                                                    <button onclick="window.mainSearch.addTagFilter('${ingredient}', 'ingredient')" 
                                                             class="border-0 bg-primary text-white m-2 p-1 text-start w-100">
                                                         ${ingredient}
                                                     </button>
@@ -72,7 +72,7 @@ function createAppliances(recipes) {
 
     let html = ''
     map.forEach((value, appliance) => html += `<li class="col-4">
-                                                    <button onclick="window.ddl.addTagFilter('${appliance}', 'appliance')" 
+                                                    <button onclick="window.mainSearch.addTagFilter('${appliance}', 'appliance')" 
                                                             class="border-0 bg-success text-white m-2 p-1 text-start w-100">
                                                         ${appliance}
                                                     </button>
@@ -125,7 +125,7 @@ function createUstensils(recipes) {
 
     let html = ''
     map.forEach((value, ustensil) => html += `<li class="col-4">
-    <button onclick="window.ddl.addTagFilter('${ustensil}', 'ustensil')"
+    <button onclick="window.mainSearch.addTagFilter('${ustensil}', 'ustensil')"
             class="border-0 bg-danger text-white m-2 p-1 text-start w-100">
        ${ustensil}
     </button>
