@@ -10,6 +10,7 @@ export function createRecipeDOM(recipe) {
 
     // Créer un nouvel élément article
     const article = document.createElement('article');  
+    const img=document.createElement('img');
    
     // Obtenir la description de la recette et définir le nombre de caractères à afficher ici 200
     const recipeDescription = recipe.description;
@@ -19,7 +20,9 @@ export function createRecipeDOM(recipe) {
     const description ='<strong>description: <br></strong>'+( recipeDescription.substring(0, amount)  + (recipeDescription.length > amount ? "..." :""));
          
     // Ajouter plusieurs classes à l'élément article en utilisant classList.add()
+   
     article.classList.add('col-12', 'col-md-6', 'col-lg-4', 'mb-4');
+    
 
     // Définir le contenu HTML de l'élément article
     // Obtenir le nom de la recette à partir de l'objet de recette
@@ -27,7 +30,9 @@ export function createRecipeDOM(recipe) {
     // Afficher la liste des ingrédients
     // Afficher la description de la recette raccourcie
     article.innerHTML = `
+    
         <div class="bg-light rounded-2">
+       <img class="card_img">
             <div class="d-flex justify-content-between">
                 <h2 class="card__title m-3">
                     ${recipe.name} 
