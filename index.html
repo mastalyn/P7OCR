@@ -43,48 +43,52 @@
     <div id="tagsContainer" class="d-flex flex-wrap"></div>
     <div id="sorter" class="d-flex justify-content-start my-4">
         <div class="position-relative d-inline-flex me-2">
-            <button id="ingredientsButton" class="btn btn-lg btn-primary btn-block ">
-                Ingredients
-            </button>            
+            <button id="ingredientsButton" class="btn btn-lg btn-primary btn-block" style="margin-right: 17px; ">
+                Ingredients  <i class="fa fa-chevron-down"  aria-hidden="true" ></i>
+            </button>  
+                      
             <input type="text" 
                    id="tags_search"               
-                   class="bg-primary --bs-primary-text text-white ps-4 border-0 rounded-top d-none"
-                   style="width: 700px;"
+                   class="bg-primary --bs-primary-text text-white ps-4 border-0  d-none"
+                   style="width: 500px;"
                    placeholder="Rechercher un ingrédient ..."
                    aria-label="Rechercher un ingrédient">
+                   <i class="fa fa-chevron-up bg-primary" id="chevronUp" aria-hidden="true" style="width: 100px;color: white;display: flex;flex-direction: row;flex-wrap: wrap;align-content: stretch;justify-content: center;align-items: center;border-top-right-radius: 5px;margin-right: 17px;"></i>
             <ul id="ingredientsOptions"
                 class="d-none position-absolute top-100 bg-primary row list-unstyled p-0 m-0 rounded-bottom"
-                style="width: 700px;"
+                style="width: 600px;"
             ></ul>
-        </div>
+        
         <div class="position-relative d-inline-flex me-2">
-            <button id="appliancesButton" class="btn btn-lg btn-success text-white btn-block">
-                Appareils
+            <button id="appliancesButton" class="btn btn-lg btn-success btn-block" style="margin-right: 17px; ">
+                Appareils <i class="fa fa-chevron-down"  aria-hidden="true" ></i>
             </button>
             <input type="text"
                    id="tags_search"  
-                   class="bg-success --bs-success-text text-white ps-4 border-0 rounded-top d-none"
-                   style="width: 700px;"
+                   class="bg-success --bs-success-text text-white ps-4 border-0  d-none"
+                   style="width:500px;"
                    placeholder="Rechercher un appareil ..."
                    aria-label="Rechercher un appareil">
+                   <i class="fa fa-chevron-up bg-success" id="chevronUpAppliance" aria-hidden="true" style="width: 100px;color: white;display: flex;flex-direction: row;flex-wrap: wrap;align-content: stretch;justify-content: center;align-items: center;border-top-right-radius: 5px;margin-right: 17px;"></i>
             <ul id="appliancesOptions"
                 class="d-none position-absolute top-100 bg-success row list-unstyled p-0 m-0 rounded-bottom"
-                style="width: 700px;"
+                style="width: 600px;"
             ></ul>
         </div>
         <div class="position-relative d-inline-flex me-2">
-            <button id="ustensilsButton" class="btn btn-lg btn-danger text-white btn-block">
-                Ustensiles
+            <button id="ustensilsButton"class="btn btn-lg btn-danger btn-block" style="margin-left: -7px;">
+                Ustensiles <i class="fa fa-chevron-down"  aria-hidden="true" ></i>
             </button>
             <input type="text"
                    id="tags_search"  
-                   class="bg-danger --bs-danger-text text-white ps-4 border-0 rounded-top d-none"
-                   style="width: 700px;"
+                   class="bg-danger --bs-danger-text text-white ps-4 border-0  d-none"
+                   style="width: 500px;"
                    placeholder="Rechercher un ustensile ..."
                    aria-label="Rechercher un ustensile">
+                   <i class="fa fa-chevron-up bg-danger" id="chevronUpUstensils" aria-hidden="true" style="width: 100px;color: white;display: flex;flex-direction: row;flex-wrap: wrap;align-content: stretch;justify-content: center;align-items: center;border-top-right-radius: 5px;margin-right: 17px;"></i>
             <ul id="ustensilsOptions"
                 class="d-none position-absolute top-100 bg-danger row list-unstyled p-0 m-0 rounded-bottom"
-                style="width: 700px;">
+                style="width: 600px;">
             </ul>
             
         </div>

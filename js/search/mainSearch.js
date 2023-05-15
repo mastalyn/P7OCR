@@ -119,6 +119,7 @@ removeTagFilter(tagName) {
     this.filterBytags = this.filterBytags.filter(tag => tag.name !== tagName);  
     this.search(this.mainsearch.value);     
     tags(this.filterBytags);
+   
 }
 
                
