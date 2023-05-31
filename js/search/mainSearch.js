@@ -21,7 +21,7 @@ export default class ddl {
     this.mainsearch.onkeyup = (event) => {
       if (event.target.value.length > 2) {
         const t0 = performance.now();
-        this.search(event.target.value);
+        this.search3(event.target.value);
         const t1 = performance.now();
         console.log(`Call to search took ${t1 - t0} milliseconds.`);
       } else {
@@ -55,27 +55,21 @@ export default class ddl {
 
       return false;
     });
- //si la recherche ne retourne aucun résultat, on affiche un message
- if (filteredRecipes.length === 0) {
-  this.recipesSection.innerHTML = `<div class="col-12 text-center">
+    //si la recherche ne retourne aucun résultat, on affiche un message
+    if (filteredRecipes.length === 0) {
+      this.recipesSection.innerHTML = `<div class="col-12 text-center">
                                       <p class="text-secondary">
                                           Aucune recette ne correspond à votre critère… vous pouvez
                                           chercher « tarte aux pommes », « poisson », etc.
                                       </p>
-                                    </div>`
-}
-else {
-  this.recipesSection.innerHTML = '';
-  filteredRecipes.forEach(recipe => {
-          this.recipesSection.appendChild(createRecipeDOM(recipe))
-      })
-}
-  DropDownList(filteredRecipes);
-
-  
-    
-
-    
+                                    </div>`;
+    } else {
+      this.recipesSection.innerHTML = "";
+      filteredRecipes.forEach((recipe) => {
+        this.recipesSection.appendChild(createRecipeDOM(recipe));
+      });
+    }
+    DropDownList(filteredRecipes);
   }
 
   nativeFind(array, callback) {
@@ -168,8 +162,6 @@ else {
     });
   }
 
-  
-  
   isFilteredByTag(recipe) {
     let isRecipeFiltered = true;
 
