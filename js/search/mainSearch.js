@@ -21,7 +21,7 @@ export default class ddl {
     this.mainsearch.onkeyup = (event) => {
       if (event.target.value.length > 2) {
         const t0 = performance.now();
-        this.search3(event.target.value);
+        this.search(event.target.value);
         const t1 = performance.now();
         console.log(`Call to search took ${t1 - t0} milliseconds.`);
       } else {
@@ -55,14 +55,27 @@ export default class ddl {
 
       return false;
     });
+ //si la recherche ne retourne aucun résultat, on affiche un message
+ if (filteredRecipes.length === 0) {
+  this.recipesSection.innerHTML = `<div class="col-12 text-center">
+                                      <p class="text-secondary">
+                                          Aucune recette ne correspond à votre critère… vous pouvez
+                                          chercher « tarte aux pommes », « poisson », etc.
+                                      </p>
+                                    </div>`
+}
+else {
+  this.recipesSection.innerHTML = '';
+  filteredRecipes.forEach(recipe => {
+          this.recipesSection.appendChild(createRecipeDOM(recipe))
+      })
+}
+  DropDownList(filteredRecipes);
 
-    //on affiche les recttes
-    this.recipesSection.innerHTML = "";
-    filteredRecipes.forEach((recipe) => {
-      this.recipesSection.appendChild(createRecipeDOM(recipe));
-    });
+  
+    
 
-    //  DropDownList(filteredRecipes);
+    
   }
 
   nativeFind(array, callback) {
@@ -75,6 +88,16 @@ export default class ddl {
     return null;
   }
 
+  nativeSome(array, callback) {
+    const l = array.length;
+    for (let i = 0; i < l; i++) {
+      if (callback(array[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   nativeFilter(array, callback) {
     const l = array.length;
     const results = [];
@@ -84,6 +107,14 @@ export default class ddl {
       }
     }
     return results;
+  }
+
+  nativeForEach(array, callback) {
+    const l = array.length;
+    for (let i = 0; i < l; i++) {
+      const item = array[i];
+      callback(item);
+    }
   }
   search2(query) {
     const filteredRecipes = this.nativeFilter(this.recipes, (recipe) => {
@@ -104,93 +135,41 @@ export default class ddl {
 
       return false;
     });
-       //on affiche les recttes
-       this.recipesSection.innerHTML = "";
-       filteredRecipes.forEach((recipe) => {
-         this.recipesSection.appendChild(createRecipeDOM(recipe));
-       });
-     }
-     search3(query) {
-      const filteredRecipes = this.nativeFilter(this.recipes, (recipe) => {
-        const existingTag =
-          recipe.name.toLowerCase().includes(query.toLowerCase()) ||
-          recipe.description.toLowerCase().includes(query.toLowerCase()) ||
-          this.nativeForEach(recipe.ingredients, (ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(query.toLowerCase())
-          );
-  
-        if (existingTag && this.filterBytags === []) {
-          return recipe;
-        }
-  
-        if (existingTag && this.isFilteredByTag(recipe)) {
-          return recipe;
-        }
-  
-        return false;
-      });
-         //on affiche les recttes
-         this.recipesSection.innerHTML = "";
-         filteredRecipes.forEach((recipe) => {
-           this.recipesSection.appendChild(createRecipeDOM(recipe));
-         });
-       }
+    //on affiche les recttes
+    this.recipesSection.innerHTML = "";
+    filteredRecipes.forEach((recipe) => {
+      this.recipesSection.appendChild(createRecipeDOM(recipe));
+    });
+  }
+  search3(query) {
+    const filteredRecipes = this.nativeFilter(this.recipes, (recipe) => {
+      const existingTag =
+        recipe.name.toLowerCase().includes(query.toLowerCase()) ||
+        recipe.description.toLowerCase().includes(query.toLowerCase()) ||
+        this.nativeForEach(recipe.ingredients, (ingredient) =>
+          ingredient.ingredient.toLowerCase().includes(query.toLowerCase())
+        );
 
-  nativeForEach(recipe){
-  let isRecipeFiltered = true;
-  const filterBytagsLength = this.filterBytags.length;
-
-  for (let i = 0; i < filterBytagsLength; i++) {
-    const tag = this.filterBytags[i];
-
-    if (tag.tagCategory === "ingredient") {
-      const ingredientsLength = recipe.ingredients.length;
-      let isMatchingIngredient = false;
-
-      for (let j = 0; j < ingredientsLength; j++) {
-        const ingredient = recipe.ingredients[j].ingredient.toLowerCase();
-
-        if (ingredient === tag.name.toLowerCase()) {
-          isMatchingIngredient = true;
-          break;
-        }
+      if (existingTag && this.filterBytags === []) {
+        return recipe;
       }
 
-      if (!isMatchingIngredient) {
-        isRecipeFiltered = false;
-        break;
-      }
-    } else if (tag.tagCategory === "appliance") {
-      if (recipe.appliance.toLowerCase() !== tag.name.toLowerCase()) {
-        isRecipeFiltered = false;
-        break;
-      }
-    } else if (tag.tagCategory === "ustensil") {
-      const ustensilsLength = recipe.ustensils.length;
-      let isMatchingUstensil = false;
-
-      for (let k = 0; k < ustensilsLength; k++) {
-        const ustensil = recipe.ustensils[k].toLowerCase();
-
-        if (ustensil === tag.name.toLowerCase()) {
-          isMatchingUstensil = true;
-          break;
-        }
+      if (existingTag && this.isNativeFilteredByTag(recipe)) {
+        return recipe;
       }
 
-      if (!isMatchingUstensil) {
-        isRecipeFiltered = false;
-        break;
-      }
-    }
+      return false;
+    });
+
+    //on affiche les recttes
+    this.recipesSection.innerHTML = "";
+    this.nativeForEach(filteredRecipes, (recipe) => {
+      this.recipesSection.appendChild(createRecipeDOM(recipe));
+    });
   }
 
- // return nativeForEach;
-}
-
-
- 
-
+  
+  
   isFilteredByTag(recipe) {
     let isRecipeFiltered = true;
 
@@ -215,6 +194,44 @@ export default class ddl {
       } else if (tag.tagCategory === "ustensil") {
         // Vérifie si au moins un ustensile correspond au nom du tag
         const isMatchingUstensil = recipe.ustensils.some(
+          (ustensil) => ustensil.toLowerCase() === tag.name
+        );
+        if (!isMatchingUstensil) {
+          // Si aucun ustensile ne correspond au tag,  alors False
+          isRecipeFiltered = false;
+        }
+      }
+    });
+
+    return isRecipeFiltered;
+  }
+
+  isNativeFilteredByTag(recipe) {
+    let isRecipeFiltered = true;
+
+    this.nativeForEach(this.filterBytags, (tag) => {
+      if (tag.tagCategory === "ingredient") {
+        // Vérifie si au moins un ingrédient correspond au  tag et le converti en minuscule
+        // some() est utilisé pour vérifier si au moins un élément des tableaux ingredients ou ustensils correspond au  tag.
+        // Elle prend une fonction de callback  en argument, elle est exécutée pour chaque élément du tableau jusqu'à ce qu'elle retoune true,
+        // ou jusqu'à ce que la fin du tableau soit atteinte.
+        const isMatchingIngredient = this.nativeSome(
+          recipe.ingredients,
+          (ingredient) => ingredient.ingredient.toLowerCase() === tag.name
+        );
+        if (!isMatchingIngredient) {
+          // Si aucun ingrédient ne correspond au tag,  alors false
+          isRecipeFiltered = false;
+        }
+      } else if (tag.tagCategory === "appliance") {
+        if (recipe.appliance.toLowerCase() !== tag.name) {
+          // Si l'appareil ne correspond pas au tag,  alors false
+          isRecipeFiltered = false;
+        }
+      } else if (tag.tagCategory === "ustensil") {
+        // Vérifie si au moins un ustensile correspond au nom du tag
+        const isMatchingUstensil = this.nativeSome(
+          recipe.ustensils,
           (ustensil) => ustensil.toLowerCase() === tag.name
         );
         if (!isMatchingUstensil) {
