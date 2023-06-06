@@ -21,12 +21,14 @@ export default class ddl {
     this.mainsearch.onkeyup = (event) => {
       if (event.target.value.length > 2) {
         const t0 = performance.now();
-        this.search3(event.target.value);
+        this.search(event.target.value);
+        console.log(event.target.value)
         const t1 = performance.now();
         console.log(`Call to search took ${t1 - t0} milliseconds.`);
-      } else {
+      }  else {
         this.search("");
       }
+       
     };
   }
 
