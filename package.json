@@ -1,0 +1,23 @@
+{
+  "name": "p7ocr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./js/**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mastalyn/P7OCR.git"
+  },
+  "author": "MIT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mastalyn/P7OCR/issues"
+  },
+  "homepage": "https://github.com/mastalyn/P7OCR#readme",
+  "devDependencies": {
+    "eslint": "^8.42.0"
+  }
+}

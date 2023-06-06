@@ -30,43 +30,41 @@ function createIngredients(recipes) {
   wrapper.innerHTML = html;
   // Récupère le bouton qui affichera la liste déroulante.
   const buttonToDisplayList = document.getElementById("ingredientsButton");
-  const chevronUp=document.getElementById('chevronUp');
-  const chevronUpAppliance= document.getElementById('chevronUpAppliance')
-  const chevronUpUstensils=document.getElementById('chevronUpUstensils')
- 
+  const chevronUp = document.getElementById("chevronUp");
+  const chevronUpAppliance = document.getElementById("chevronUpAppliance");
+  const chevronUpUstensils = document.getElementById("chevronUpUstensils");
+
   chevronUp.classList.add("d-none");
   chevronUpAppliance.classList.add("d-none");
   chevronUpUstensils.classList.add("d-none");
-  
+
   // Ajoute un écouteur d'événements au bouton pour afficher la dropDown lorsqu'il est cliqué.
   buttonToDisplayList.addEventListener("click", (event) => {
-    
     event.preventDefault();
     // cache le bouton ingedient
     buttonToDisplayList.classList.add("d-none");
     chevronUp.classList.remove("d-none");
-  
 
     const input =
       buttonToDisplayList.parentNode.getElementsByTagName("input")[0];
-      input.parentNode.classList.remove("d-none");
-      // affiche le input recherche
-      input.classList.remove("d-none");
+    input.parentNode.classList.remove("d-none");
+    // affiche le input recherche
+    input.classList.remove("d-none");
     buttonToDisplayList.parentNode
-    .getElementsByTagName("ul")[0]
-    .classList.remove("d-none");
-   
-    chevronUp.addEventListener("click",(event)=>{ 
-       event.preventDefault();
-     
-      input.classList.add("d-none");
-  // Affiche la dropDown .
-  buttonToDisplayList.parentNode
-    .getElementsByTagName("ul")[0].classList.add("d-none");
-    buttonToDisplayList.classList.remove("d-none");
-    chevronUp.classList.add("d-none")
+      .getElementsByTagName("ul")[0]
+      .classList.remove("d-none");
 
-  } );
+    chevronUp.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      input.classList.add("d-none");
+      // Affiche la dropDown .
+      buttonToDisplayList.parentNode
+        .getElementsByTagName("ul")[0]
+        .classList.add("d-none");
+      buttonToDisplayList.classList.remove("d-none");
+      chevronUp.classList.add("d-none");
+    });
 
     input.onkeyup = (event) => {
       const list = event.target.parentNode.getElementsByTagName("ul")[0];
@@ -84,11 +82,11 @@ function createIngredients(recipes) {
       }
     };
     // Ajoute un événement pour masquer la dropDown  lorsque l'utilisateur clique en dehors de celle-ci.
-   
   });
 }
 // fonction pour  crée une dropDown  des equipements.
 function createAppliances(recipes) {
+  const chevronUpAppliance = document.getElementById("chevronUpAppliance");
   const wrapper = document.getElementById("appliancesOptions");
 
   const map = new Map();
@@ -112,28 +110,27 @@ function createAppliances(recipes) {
     // cache le bouton ingedient
     buttonToDisplayList.classList.add("d-none");
     chevronUpAppliance.classList.remove("d-none");
-  
 
     const input =
       buttonToDisplayList.parentNode.getElementsByTagName("input")[0];
-      input.parentNode.classList.remove("d-none");
-      // affiche le input recherche
-      input.classList.remove("d-none");
+    input.parentNode.classList.remove("d-none");
+    // affiche le input recherche
+    input.classList.remove("d-none");
     buttonToDisplayList.parentNode
-    .getElementsByTagName("ul")[0]
-    .classList.remove("d-none");
-   
-    chevronUpAppliance.addEventListener("click",(event)=>{ 
-       event.preventDefault();
-     
-      input.classList.add("d-none");
-  // Affiche la dropDown .
-  buttonToDisplayList.parentNode
-    .getElementsByTagName("ul")[0].classList.add("d-none");
-    buttonToDisplayList.classList.remove("d-none");
-    chevronUpAppliance.classList.add("d-none")
+      .getElementsByTagName("ul")[0]
+      .classList.remove("d-none");
 
-  } );
+    chevronUpAppliance.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      input.classList.add("d-none");
+      // Affiche la dropDown .
+      buttonToDisplayList.parentNode
+        .getElementsByTagName("ul")[0]
+        .classList.add("d-none");
+      buttonToDisplayList.classList.remove("d-none");
+      chevronUpAppliance.classList.add("d-none");
+    });
 
     input.onkeyup = (event) => {
       const list = event.target.parentNode.getElementsByTagName("ul")[0];
@@ -150,11 +147,11 @@ function createAppliances(recipes) {
         }
       }
     };
- 
   });
 }
 // fonction pour  crée une liste dropDown  d'ustensils.
 function createUstensils(recipes) {
+  const chevronUpUstensils = document.getElementById("chevronUpUstensils");
   const wrapper = document.getElementById("ustensilsOptions");
 
   const map = new Map();
@@ -175,32 +172,32 @@ function createUstensils(recipes) {
   wrapper.innerHTML = html;
 
   const buttonToDisplayList = document.getElementById("ustensilsButton");
-  buttonToDisplayList.addEventListener("click", (event) => { event.preventDefault();
+  buttonToDisplayList.addEventListener("click", (event) => {
+    event.preventDefault();
     // cache le bouton ingedient
     buttonToDisplayList.classList.add("d-none");
     chevronUpUstensils.classList.remove("d-none");
-  
 
     const input =
       buttonToDisplayList.parentNode.getElementsByTagName("input")[0];
-      input.parentNode.classList.remove("d-none");
-      // affiche le input recherche
-      input.classList.remove("d-none");
+    input.parentNode.classList.remove("d-none");
+    // affiche le input recherche
+    input.classList.remove("d-none");
     buttonToDisplayList.parentNode
-    .getElementsByTagName("ul")[0]
-    .classList.remove("d-none");
-   
-    chevronUpUstensils.addEventListener("click",(event)=>{ 
-       event.preventDefault();
-     
-      input.classList.add("d-none");
-  // Affiche la dropDown .
-  buttonToDisplayList.parentNode
-    .getElementsByTagName("ul")[0].classList.add("d-none");
-    buttonToDisplayList.classList.remove("d-none");
-    chevronUpUstensils.classList.add("d-none")
+      .getElementsByTagName("ul")[0]
+      .classList.remove("d-none");
 
-  } );
+    chevronUpUstensils.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      input.classList.add("d-none");
+      // Affiche la dropDown .
+      buttonToDisplayList.parentNode
+        .getElementsByTagName("ul")[0]
+        .classList.add("d-none");
+      buttonToDisplayList.classList.remove("d-none");
+      chevronUpUstensils.classList.add("d-none");
+    });
 
     input.onkeyup = (event) => {
       const list = event.target.parentNode.getElementsByTagName("ul")[0];
@@ -217,7 +214,5 @@ function createUstensils(recipes) {
         }
       }
     };
-
-
   });
 }
